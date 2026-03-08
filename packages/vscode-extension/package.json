@@ -1,0 +1,61 @@
+{
+    "name": "antigravity-bridge",
+    "displayName": "Antigravity Bridge",
+    "description": "Auto-execute tasks from OpenClaw via file-system mailbox, powered by Antigravity's language model",
+    "version": "0.1.0",
+    "publisher": "chaoyuqi",
+    "engines": {
+        "vscode": "^1.100.0"
+    },
+    "categories": [
+        "AI",
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "configuration": {
+            "title": "Antigravity Bridge",
+            "properties": {
+                "antigravityBridge.tasksDir": {
+                    "type": "string",
+                    "default": "~/antigravity-tasks",
+                    "description": "Directory for the task mailbox"
+                },
+                "antigravityBridge.autoExecute": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically execute new tasks when they arrive"
+                },
+                "antigravityBridge.pollIntervalMs": {
+                    "type": "number",
+                    "default": 3000,
+                    "description": "Poll interval for checking new tasks (milliseconds)"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "antigravityBridge.processNext",
+                "title": "Antigravity Bridge: Process Next Pending Task"
+            },
+            {
+                "command": "antigravityBridge.showStatus",
+                "title": "Antigravity Bridge: Show Task Queue Status"
+            }
+        ]
+    },
+    "scripts": {
+        "dev": "tsc -watch",
+        "build": "tsc",
+        "package": "npx @vscode/vsce package --no-dependencies",
+        "lint": "eslint src"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.100.0",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0"
+    }
+}
